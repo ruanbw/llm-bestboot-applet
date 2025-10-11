@@ -14,6 +14,14 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+const ddd = [
+  'border-l-4',
+  'border-blue-500',
+  'border-emerald-500',
+  'border-amber-500',
+  'border-purple-500',
+]
+
 export default defineConfig({
   presets: [
     presetUni({
@@ -51,7 +59,7 @@ export default defineConfig({
     },
   ],
   // 动态图标需要在这里配置，或者写在vue页面中注释掉
-  safelist: ['i-carbon-code', 'i-carbon-home', 'i-carbon-user'],
+  safelist: ['i-carbon-code', 'i-carbon-home', 'i-carbon-user', ...ddd],
   rules: [
     [
       'p-safe',

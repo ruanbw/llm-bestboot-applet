@@ -153,6 +153,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "miniprogram-api-typings": "^4.1.0",
+    "mp-html": "^2.5.1",
     "openapi-ts-request": "^1.6.7",
     "postcss": "^8.4.49",
     "postcss-html": "^1.8.0",

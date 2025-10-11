@@ -11,18 +11,10 @@ let refreshing = false // 防止重复刷新 token 标识
 let taskQueue: (() => void)[] = [] // 刷新 token 请求队列
 
 export function http<T>(options: CustomRequestOptions) {
-
   const tokenStore = useTokenStore()
-
-  const defaultHeader = {
-    Authentication: tokenStore.tokenInfo.accessToken
-  }
 
   // 1. 返回 Promise 对象
   return new Promise<T>((resolve, reject) => {
-
-    options.header = { ...options.header, ...defaultHeader }
-
     uni.request({
       ...options,
       dataType: 'json',
@@ -105,6 +97,10 @@ export function http<T>(options: CustomRequestOptions) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           // 处理业务逻辑错误
           if (code !== ResultEnum.Success0 && code !== ResultEnum.Success200) {
+            // 处理llm响应体
+            if ('answer' in responseData)
+              return resolve(responseData as T)
+
             const msg = `请求错误[${code}]：${responseData.message || responseData.msg}`
             uni.showToast({
               icon: 'none',
@@ -117,10 +113,10 @@ export function http<T>(options: CustomRequestOptions) {
 
         // 处理其他错误
         !options.hideErrorToast
-          && uni.showToast({
-            icon: 'none',
-            title: (res.data as any).msg || '请求错误',
-          })
+        && uni.showToast({
+          icon: 'none',
+          title: (res.data as any).msg || '请求错误',
+        })
         reject(res)
       },
       // 响应失败

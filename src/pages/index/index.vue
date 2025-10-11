@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { safeAreaInsets } from '@/utils/systemInfo'
-
 defineOptions({
   name: 'Home',
 })
@@ -9,26 +7,40 @@ definePage({
   type: 'home',
   style: {
     // 'custom' 表示开启自定义导航栏，默认 'default'
-    navigationStyle: 'custom',
+    // navigationStyle: 'custom',
     navigationBarTitleText: '首页',
   },
 })
 
-// #region gotoAbout
-function gotoAbout() {
+const list = [
+  {
+    id: '1',
+    title: '智能助手-员工手册',
+    description: '员工守则、请假、报销等相关。',
+    meta: 'text',
+    tags: ['CHAT', 'RAG'],
+  },
+]
+
+// #region gotoChat
+function gotoChat(item) {
   uni.navigateTo({
-    url: '/pages/about/index',
+    url: `/pages/chat/index?id=${item.id}`,
   })
 }
 // #endregion
 </script>
 
 <template>
-  <view class="bg-white px-4" :style="{ marginTop: `${safeAreaInsets?.top}px` }">
-    <view class="mt-4 text-center">
-      <wd-button type="primary" class="ml-2" @click="gotoAbout">
-        前往About
-      </wd-button>
+  <view class="bg-white p-4">
+    <view v-for="item in list" :key="item.id" @click="gotoChat(item)">
+      <!-- 基础卡片 -->
+      <UniBeautifulCard
+        :title="item.title" :description="item.description" :meta="item.meta" :tags="item.tags"
+        @action="gotoChat"
+      />
     </view>
   </view>
 </template>
+
+<style lang="scss" scoped></style>

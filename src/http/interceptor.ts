@@ -53,7 +53,7 @@ const httpInterceptor = {
     const token = tokenStore.validToken
 
     if (token) {
-      options.header.Authorization = `Bearer ${token}`
+      options.header.Authentication = `${token}`
     }
     return options
   },
