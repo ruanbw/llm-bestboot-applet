@@ -123,7 +123,7 @@ async function handleSend() {
       query: text,
       response_mode: 'blocking',
       conversation_id: conversationId.value,
-      user: userStore.userInfo.id,
+      user: `applet-user-${userStore.userInfo.id}`, // 用以在 dify logs 页面标识是哪个用户
       files: [],
     })
 
