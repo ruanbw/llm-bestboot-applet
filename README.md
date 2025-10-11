@@ -6,6 +6,10 @@
 
 - llm-chat
 
+## 预览
+
+![](./preview/68b533c962e17b1b2158c39a34b2f278.png)
+
 ## 其他
 
 chat 返回的 md 内容采用 [mp-html](https://jin-yufeng.github.io/mp-html/#/) 解析
