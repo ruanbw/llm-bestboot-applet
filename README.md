@@ -11,8 +11,7 @@
 
 ![](./preview/68b533c962e17b1b2158c39a34b2f278.png)
 
-<video controls="controls" src='./preview/preview.mp4'></video>
-
+https://github.com/user-attachments/assets/606b41f5-3ae4-4b76-9bad-49e377af64bc
 ## 其他
 
 chat 返回的 md 内容采用 [mp-html](https://jin-yufeng.github.io/mp-html/#/) 解析
