@@ -9,6 +9,6 @@ export interface IChatForm {
   files: any[]
 }
 
-export function chatMessages(chatForm: IChatForm) {
-  return http.post<void>('/llm/v1/chat-messages', chatForm)
+export function chatMessages(id: number, chatForm: IChatForm) {
+  return http.post<void>(`/llm/${id}/v1/chat-messages`, chatForm)
 }

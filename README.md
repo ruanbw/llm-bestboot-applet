@@ -1,6 +1,7 @@
 ## llm-bestboot-applet
 
 [配套后端 llm-bestboot](https://github.com/ruanbw/llm-bestboot)
+[配套后后台 llm-bestboot-admin](https://github.com/ruanbw/llm-bestboot-admin)
 
 ## 功能
 
@@ -9,6 +10,8 @@
 ## 预览
 
 ![](./preview/68b533c962e17b1b2158c39a34b2f278.png)
+
+<video controls="controls" src='./preview/preview.mp4'></video>
 
 ## 其他
 

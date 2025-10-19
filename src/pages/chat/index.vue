@@ -21,8 +21,8 @@
     <!-- 输入区域 -->
     <view class="input-area">
       <input
-        v-model="inputText" class="input-field" placeholder="请输入消息..." confirm-type="send"
-        :disabled="loading" @confirm="handleSend"
+        v-model="inputText" class="input-field" placeholder="请输入消息..." confirm-type="send" :disabled="loading"
+        @confirm="handleSend"
       >
       <button class="send-btn" :disabled="!inputText.trim() || loading" @click="handleSend">
         发送
@@ -33,15 +33,32 @@
 
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
+import { getChat } from '@/api/chat'
 import { chatMessages } from '@/api/llm'
 import { useUserStore } from '@/store/user'
 import mpHtml from '@/uni_modules/mp-html/components/mp-html/mp-html'
 
 defineOptions({ name: 'Chat' })
 
+let id = void 0
+const chatInfo = ref({})
+
+onLoad((options) => {
+  id = options.id
+})
+
+onShow(() => {
+  getChat(id).then((res) => {
+    chatInfo.value = res
+    uni.setNavigationBarTitle({
+      title: chatInfo.value.chatName,
+    })
+  })
+})
+
 definePage({
   style: {
-    navigationBarTitleText: '',
+    navigationBarTitleText: '聊天',
   },
 })
 
@@ -118,7 +135,7 @@ async function handleSend() {
   scrollToBottom()
 
   try {
-    const res = await chatMessages({
+    const res = await chatMessages(id, {
       inputs: {},
       query: text,
       response_mode: 'blocking',

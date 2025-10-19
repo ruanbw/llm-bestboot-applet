@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { getChatList } from '@/api/chat'
+
 defineOptions({
   name: 'Home',
 })
@@ -12,15 +14,14 @@ definePage({
   },
 })
 
-const list = [
-  {
-    id: '1',
-    title: '智能助手-员工手册',
-    description: '员工守则、请假、报销等相关。',
-    meta: 'text',
-    tags: ['CHAT', 'RAG'],
-  },
-]
+const list = ref([])
+
+onShow(() => getData())
+
+async function getData() {
+  const res = await getChatList()
+  list.value = res.records
+}
 
 // #region gotoChat
 function gotoChat(item) {
